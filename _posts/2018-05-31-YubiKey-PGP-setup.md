@@ -4,28 +4,26 @@ title: "YubiKey PGP setup"
 date: 2018-05-31
 ---
 
-### How to configure 2 YubiKeys with the same PGP on Windows 10
+# How to configure 2 YubiKeys with the same PGP on Windows 10
 
-#### Install the latest version of Gpg4win (here 3.1.1 version was used, which contains GnuPG version 2.2.7)
+## Install the latest version of Gpg4win (here 3.1.1 version was used, which contains GnuPG version 2.2.7)
 
-#### Let's check if installation worked, start command line
+## Let's check if installation worked, start command line
+
 To keep English output set LANG variable.
 
-```
-set LANG=C
-gpg --version
-```
+    set LANG=C
+    gpg --version
+
 
 #### Check if you do not have any keys on your YubiKeys (both)
 
-```
-gpg --card-status
-
-Signature key ....: [none]
-Encryption key....: [none]
-Authentication key: [none]
-General key info..: [none]
-```
+    gpg --card-status
+    
+    Signature key ....: [none]
+    Encryption key....: [none]
+    Authentication key: [none]
+    General key info..: [none]
 
 #### Configure both YubiKeys
 
