@@ -281,10 +281,209 @@ In new version of GnuPG revocation keys are generated automatically
 
     gpg> save
     
-Now generate 3 subkeys for each single action. Those subkeys will be transferre to YubiKeys
+Now generate 3 subkeys for each single action (S, E and A). Those subkeys will be transferre to YubiKeys
 
     gpg --expert --edit-key 3FB82C90A3785C870D2201F3A81B833AF353ADF4
     addkey
-Select 2048 bits, one year validiti
- 
- 
+    
+Select 2048 bits, one year validity
+
+After all keys are generate export private key and make safe backup of this key. 
+Also make temporary backup of directory C:\Users\John Smith\AppData\Roaming\gnupg.  We will use this backup copy in next step
+
+Now transfer keys to first YubiKey
+
+    gpg --expert --edit-key 3FB82C90A3785C870D2201F3A81B833AF353ADF4
+
+    Secret key is available.
+
+    sec  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: ultimate      validity: ultimate
+    ssb  rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    ssb  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    ssb  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ultimate] (1). John Smith <john.smith@gmail.com>
+    [ultimate] (2)  John Smith <jsmith@keybase.io>
+    [ultimate] (3)  [jpeg image of size 3233]
+
+
+    gpg> key 1
+
+    sec  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: ultimate      validity: ultimate
+    ssb* rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    ssb  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    ssb  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ultimate] (1). John Smith <john.smith@gmail.com>
+    [ultimate] (2)  John Smith <jsmith@keybase.io>
+    [ultimate] (3)  [jpeg image of size 3233]
+
+    gpg> keytocard
+    Please select where to store the key:
+    (1) Signature key
+    (3) Authentication key
+    Your selection? 1
+
+    sec  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: ultimate      validity: ultimate
+    ssb* rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    ssb  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    ssb  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ultimate] (1). John Smith <john.smith@gmail.com>
+    [ultimate] (2)  John Smith <jsmith@keybase.io>
+    [ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 2
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb  rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> toggle
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb  rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 3
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb* rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb* rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 1
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb* rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 3
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb  rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> keytocard
+Please select where to store the key:
+   (2) Encryption key
+Your selection? 2
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb* rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb  rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 2
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb  rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb  rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> key 3
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb  rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb* rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg> keytocard
+Please select where to store the key:
+   (3) Authentication key
+Your selection? 3
+
+sec  rsa4096/A81B833AF353ADF4
+     created: 2018-06-01  expires: 2019-06-01  usage: C
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/9291B7082F74C020
+     created: 2018-06-01  expires: 2019-06-01  usage: S
+ssb  rsa2048/EBF0E95C17B8EA80
+     created: 2018-06-01  expires: 2019-06-01  usage: E
+ssb* rsa2048/C32F6A8DB70AD601
+     created: 2018-06-01  expires: 2019-06-01  usage: A
+[ultimate] (1). John Smith <john.smith@gmail.com>
+[ultimate] (2)  John Smith <jsmith@keybase.io>
+[ultimate] (3)  [jpeg image of size 3233]
+
+gpg>
