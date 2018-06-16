@@ -127,9 +127,6 @@ Issue the same commands on both YubiKeys.
 Toggle all actions and leave only Certify.
     
     gpg --expert --full-generate-key
-    gpg (GnuPG) 2.2.7; Copyright (C) 2018 Free Software Foundation, Inc.
-    This is free software: you are free to change and redistribute it.
-    There is NO WARRANTY, to the extent permitted by law.
     
     gpg: keybox 'C:/Users/John Smith/AppData/Roaming/gnupg/pubring.kbx' created
     Please select what kind of key you want:
@@ -175,7 +172,9 @@ Toggle all actions and leave only Certify.
     
     Your selection? q
     RSA keys may be between 1024 and 4096 bits long.
+
 My YubiKey are supporting only 2048 bits, but master key should be created with 4096.
+
     What keysize do you want? (2048) 4096
     Requested keysize is 4096 bits
     
@@ -281,14 +280,14 @@ In new version of GnuPG revocation keys are generated automatically
 
     gpg> save
     
-Now generate 3 subkeys for each single action (S, E and A). Those subkeys will be transferre to YubiKeys
+Now generate 3 subkeys for each single action (S, E and A). Those subkeys will be transferred to YubiKeys
 
     gpg --expert --edit-key 3FB82C90A3785C870D2201F3A81B833AF353ADF4
     addkey
     
 Select 2048 bits, one year validity
 
-After all keys are generate export private key and make safe backup of this key. 
+After all keys are generated, export private key and make safe backup of this key. 
 Also make temporary backup of directory C:\Users\John Smith\AppData\Roaming\gnupg.  We will use this backup copy in next step
 
 Now transfer keys to first YubiKey
@@ -309,7 +308,6 @@ Now transfer keys to first YubiKey
     [ultimate] (1). John Smith <john.smith@gmail.com>
     [ultimate] (2)  John Smith <jsmith@keybase.io>
     [ultimate] (3)  [jpeg image of size 3233]
-
 
     gpg> key 1
 
@@ -485,5 +483,3 @@ Now transfer keys to first YubiKey
     [ultimate] (1). John Smith <john.smith@gmail.com>
     [ultimate] (2)  John Smith <jsmith@keybase.io>
     [ultimate] (3)  [jpeg image of size 3233]
-
-    gpg>
