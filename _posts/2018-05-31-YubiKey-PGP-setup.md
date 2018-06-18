@@ -173,7 +173,7 @@ Toggle all actions and leave only Certify.
     Your selection? q
     RSA keys may be between 1024 and 4096 bits long.
 
-My YubiKey are supporting only 2048 bits, but master key should be created with 4096.
+My YubiKey supports only 2048 bits, but master key should be created with 4096.
 
     What keysize do you want? (2048) 4096
     Requested keysize is 4096 bits
@@ -213,7 +213,7 @@ An expiry date is important so if you forget about the key (unlikely) it become 
           3FB82C90A3785C870D2201F3A81B833AF353ADF4
     uid                      John Smith <john.smith@gmail.com>
     
-In new version of GnuPG revocation keys are generated automatically
+In new version of GnuPG revocation keys are generated automatically. Now add additional information to master key.
     
     gpg> adduid
     Real name: John Smith
@@ -358,52 +358,7 @@ Now transfer keys to first YubiKey
     [ultimate] (2)  John Smith <jsmith@keybase.io>
     [ultimate] (3)  [jpeg image of size 3233]
 
-    gpg> toggle
-
-    sec  rsa4096/A81B833AF353ADF4
-        created: 2018-06-01  expires: 2019-06-01  usage: C
-        trust: ultimate      validity: ultimate
-    ssb* rsa2048/9291B7082F74C020
-        created: 2018-06-01  expires: 2019-06-01  usage: S
-    ssb* rsa2048/EBF0E95C17B8EA80
-        created: 2018-06-01  expires: 2019-06-01  usage: E
-    ssb  rsa2048/C32F6A8DB70AD601
-        created: 2018-06-01  expires: 2019-06-01  usage: A
-    [ultimate] (1). John Smith <john.smith@gmail.com>
-    [ultimate] (2)  John Smith <jsmith@keybase.io>
-    [ultimate] (3)  [jpeg image of size 3233]
-
-    gpg> key 3
-
-    sec  rsa4096/A81B833AF353ADF4
-        created: 2018-06-01  expires: 2019-06-01  usage: C
-        trust: ultimate      validity: ultimate
-    ssb* rsa2048/9291B7082F74C020
-        created: 2018-06-01  expires: 2019-06-01  usage: S
-    ssb* rsa2048/EBF0E95C17B8EA80
-        created: 2018-06-01  expires: 2019-06-01  usage: E
-    ssb* rsa2048/C32F6A8DB70AD601
-        created: 2018-06-01  expires: 2019-06-01  usage: A
-    [ultimate] (1). John Smith <john.smith@gmail.com>
-    [ultimate] (2)  John Smith <jsmith@keybase.io>
-    [ultimate] (3)  [jpeg image of size 3233]
-
     gpg> key 1
-
-    sec  rsa4096/A81B833AF353ADF4
-        created: 2018-06-01  expires: 2019-06-01  usage: C
-        trust: ultimate      validity: ultimate
-    ssb  rsa2048/9291B7082F74C020
-        created: 2018-06-01  expires: 2019-06-01  usage: S
-    ssb* rsa2048/EBF0E95C17B8EA80
-        created: 2018-06-01  expires: 2019-06-01  usage: E
-    ssb* rsa2048/C32F6A8DB70AD601
-        created: 2018-06-01  expires: 2019-06-01  usage: A
-    [ultimate] (1). John Smith <john.smith@gmail.com>
-    [ultimate] (2)  John Smith <jsmith@keybase.io>
-    [ultimate] (3)  [jpeg image of size 3233]
-
-    gpg> key 3
 
     sec  rsa4096/A81B833AF353ADF4
         created: 2018-06-01  expires: 2019-06-01  usage: C
@@ -483,3 +438,73 @@ Now transfer keys to first YubiKey
     [ultimate] (1). John Smith <john.smith@gmail.com>
     [ultimate] (2)  John Smith <jsmith@keybase.io>
     [ultimate] (3)  [jpeg image of size 3233]
+
+All 3 subkeys were transferred to the first YubiKey, but they were removed from local directory.  Now restore local directory 
+and repeat steps above for second YubiKey.
+
+You are almost done:
+- you have master 4096 bits key (for which private key is stored in safe backup)
+- you have 2 YubiKeys with 2048 subkeys loaded
+
+
+    gpg --recv 0xA81B833AF353ADF4
+    gpg: key A81B833AF353ADF4: public key "John Smith <john.smith@gmail.com>" imported
+    gpg: Total number processed: 1
+    gpg:               imported: 1
+
+    gpg --expert --edit-key 0xA81B833AF353ADF4
+
+    pub  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: unknown       validity: unknown
+    sub  rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    sub  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    sub  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ unknown] (1). John Smith <john.smith@gmail.com>
+    [ unknown] (2)  John Smith <jsmith@keybase.io>
+    [ unknown] (3)  [jpeg image of size 3233]
+
+    gpg> trust
+    pub  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: unknown       validity: unknown
+    sub  rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    sub  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    sub  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ unknown] (1). John Smith <john.smith@gmail.com>
+    [ unknown] (2)  John Smith <jsmith@keybase.io>
+    [ unknown] (3)  [jpeg image of size 3233]
+
+    Please decide how far you trust this user to correctly verify other users' keys
+    (by looking at passports, checking fingerprints from different sources, etc.)
+
+    1 = I don't know or won't say
+    2 = I do NOT trust
+    3 = I trust marginally
+    4 = I trust fully
+    5 = I trust ultimately
+    m = back to the main menu
+
+    Your decision? 5
+    Do you really want to set this key to ultimate trust? (y/N) y
+
+    pub  rsa4096/A81B833AF353ADF4
+        created: 2018-06-01  expires: 2019-06-01  usage: C
+        trust: ultimate      validity: unknown
+    sub  rsa2048/9291B7082F74C020
+        created: 2018-06-01  expires: 2019-06-01  usage: S
+    sub  rsa2048/EBF0E95C17B8EA80
+        created: 2018-06-01  expires: 2019-06-01  usage: E
+    sub  rsa2048/C32F6A8DB70AD601
+        created: 2018-06-01  expires: 2019-06-01  usage: A
+    [ unknown] (1). John Smith <john.smith@gmail.com>
+    [ unknown] (2)  John Smith <jsmith@keybase.io>
+    [ unknown] (3)  [jpeg image of size 3233]
+    Please note that the shown key validity is not necessarily correct
+    unless you restart the program.
