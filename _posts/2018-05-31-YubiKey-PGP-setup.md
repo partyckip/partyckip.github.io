@@ -443,8 +443,9 @@ All 3 subkeys were transferred to the first YubiKey, but they were removed from 
 and repeat steps above for second YubiKey.
 
 You are almost done:
-- you have master 4096 bits key (for which private key is stored in safe backup)
-- you have 2 YubiKeys with 2048 subkeys loaded
+
+    - you have master 4096 bits key (for which private key is stored in safe backup)
+    - you have 2 YubiKeys with 2048 subkeys loaded
 
 
 Lets continue
