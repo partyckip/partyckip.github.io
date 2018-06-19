@@ -446,7 +446,6 @@ You are almost done:
 - you have master 4096 bits key (for which private key is stored in safe backup)
 - you have 2 YubiKeys with 2048 subkeys loaded
 
-
     gpg --recv 0xA81B833AF353ADF4
     gpg: key A81B833AF353ADF4: public key "John Smith <john.smith@gmail.com>" imported
     gpg: Total number processed: 1
